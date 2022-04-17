@@ -523,7 +523,9 @@ bool EGMFileFormat::LoadDirectory(const fs::path& fPath, buffers::TreeNode* n,
 }
 
 void RecursiveResourceSanityCheck(buffers::TreeNode* n, std::map<Type, std::map<int, std::string>>& IDmap) {
-
+  if(!n->has_folder())
+    return;
+	
   for (int i = 0; i < n->mutable_folder()->children_size(); ++i) {
     buffers::TreeNode* c = n->mutable_folder()->mutable_children(i);
     RecursiveResourceSanityCheck(c, IDmap);
